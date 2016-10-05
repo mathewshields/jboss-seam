@@ -1,3 +1,6 @@
+[IMPORTANT]
+Seam 2 is not maintained anymore, you should have migrated to CDI (Standard Java EE technology) long ago ;).
+See https://github.com/seam/migration or more details here https://developer.jboss.org/en/seam/seam2/blog/2015/07/20/migration-from-seam-2-to-cdideltaspike
 
 JBoss Seam - Contextual Component framework for Java EE
 -------------------------------------------------------
