@@ -2,7 +2,6 @@ package org.jboss.seam.security.jaas;
 
 import static org.jboss.seam.security.Identity.ROLES_GROUP;
 
-import java.security.acl.Group;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -15,6 +14,7 @@ import javax.security.auth.callback.PasswordCallback;
 import javax.security.auth.login.LoginException;
 import javax.security.auth.spi.LoginModule;
 
+import org.apache.cxf.common.security.GroupPrincipal;
 import org.jboss.seam.core.Expressions.MethodExpression;
 import org.jboss.seam.log.LogProvider;
 import org.jboss.seam.log.Logging;
@@ -49,9 +49,9 @@ public class SeamLoginModule implements LoginModule
    {        
       subject.getPrincipals().add(new SimplePrincipal(username));
       
-      Group roleGroup = null;
+      GroupPrincipal roleGroup = null;
       
-      for ( Group g : subject.getPrincipals(Group.class) )      
+      for ( GroupPrincipal g : subject.getPrincipals(GroupPrincipal.class) )      
       {
          if ( ROLES_GROUP.equalsIgnoreCase( g.getName() ) )
          {

@@ -1,9 +1,10 @@
 package org.jboss.seam.security;
 
 import java.security.Principal;
-import java.security.acl.Group;
 
 import javax.security.auth.Subject;
+
+import org.apache.cxf.common.security.GroupPrincipal;
 
 /**
  * Defines a security operation that can be executed within a particular 
@@ -49,7 +50,7 @@ public abstract class RunAsOperation
    
    public RunAsOperation addRole(String role)
    {
-      for ( Group sg : getSubject().getPrincipals(Group.class) )      
+      for ( GroupPrincipal sg : getSubject().getPrincipals(GroupPrincipal.class) )      
       {
          if ( Identity.ROLES_GROUP.equals( sg.getName() ) )
          {

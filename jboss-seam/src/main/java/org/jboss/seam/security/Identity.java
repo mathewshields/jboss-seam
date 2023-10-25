@@ -5,7 +5,6 @@ import static org.jboss.seam.annotations.Install.BUILT_IN;
 
 import java.io.Serializable;
 import java.security.Principal;
-import java.security.acl.Group;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
@@ -15,6 +14,7 @@ import javax.security.auth.Subject;
 import javax.security.auth.login.LoginContext;
 import javax.security.auth.login.LoginException;
 
+import org.apache.cxf.common.security.GroupPrincipal;
 import org.jboss.seam.Component;
 import org.jboss.seam.ScopeType;
 import org.jboss.seam.annotations.Create;
@@ -373,7 +373,7 @@ public class Identity implements Serializable
       // Populate the working memory with the user's principals
       for ( Principal p : getSubject().getPrincipals() )
       {         
-         if ( !(p instanceof Group))
+         if ( !(p instanceof GroupPrincipal))
          {
             if (principal == null) 
             {
@@ -443,7 +443,7 @@ public class Identity implements Serializable
       
       tryLogin();
       
-      for ( Group sg : getSubject().getPrincipals(Group.class) )      
+      for ( GroupPrincipal sg : getSubject().getPrincipals(GroupPrincipal.class) )      
       {
          if ( ROLES_GROUP.equals( sg.getName() ) )
          {
@@ -472,7 +472,7 @@ public class Identity implements Serializable
       }
       else
       {
-         for ( Group sg : getSubject().getPrincipals(Group.class) )      
+         for ( GroupPrincipal sg : getSubject().getPrincipals(GroupPrincipal.class) )      
          {
             if ( ROLES_GROUP.equals( sg.getName() ) )
             {
@@ -494,7 +494,7 @@ public class Identity implements Serializable
     */
    public void removeRole(String role)
    {     
-      for ( Group sg : getSubject().getPrincipals(Group.class) )      
+      for ( GroupPrincipal sg : getSubject().getPrincipals(GroupPrincipal.class) )      
       {
          if ( ROLES_GROUP.equals( sg.getName() ) )
          {

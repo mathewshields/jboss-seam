@@ -5,7 +5,6 @@ import static org.jboss.seam.annotations.Install.BUILT_IN;
 
 import java.io.Serializable;
 import java.security.Principal;
-import java.security.acl.Group;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -15,6 +14,7 @@ import java.util.Set;
 import org.drools.FactHandle;
 import org.drools.RuleBase;
 import org.drools.StatefulSession;
+import org.apache.cxf.common.security.GroupPrincipal;
 import org.drools.ClassObjectFilter;
 import org.jboss.seam.Component;
 import org.jboss.seam.ScopeType;
@@ -224,7 +224,7 @@ public class RuleBasedPermissionResolver implements PermissionResolver, Serializ
       {
          getSecurityContext().insert(identity.getPrincipal());
          
-         for ( Group sg : identity.getSubject().getPrincipals(Group.class) )      
+         for ( GroupPrincipal sg : identity.getSubject().getPrincipals(GroupPrincipal.class) )      
          {
             if ( Identity.ROLES_GROUP.equals( sg.getName() ) )
             {
